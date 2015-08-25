@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  header
+    span.logo Reddit Clone
+    a.submitPost(ng-click="showForm()")
+      span.plus + 
+      span.submit Submit Post
+    input.search(type="text" placeholder="Search")
+    label.sortby(for="sortby") Sort By
+    select.drop(name="sortby" id="sortby" ng-model="q")
+      option(name="sortby" value="votes") Votes
+      option(name="sortby" value="date") Date
+      option(name="sortby" value="title") Title
+  main
+    div.form(ng-hide="{{form}} % 2 = 0")
+      label.form(for='title') Title
+      p
+      input.form(name="title" id="title" placeholder="Title")
+      p
+      label.form(for='author') Author
+      p
+      input.form(name="author" id="author" placeholder="Author")
+      p
+      label.form(for="image") Image URL 
+      p
+      input.form(name="image" id="image" placeholder="Image URL")
+      p
+      label.form(for="description") Description
+      p
+      input.form(name="description" id="description" placeholder="Description")
+      p
+      button.form(type="submit") Submit Post
+    div(ng-repeat="post in posts | orderBy: q")
+      div.post
+        img.photo(ng-src="{{post.image}}")
+        p.title {{post.title}}  |  ^ v {{post.votes}}
+        p.author By {{post.author}}
+        p.description {{post.description}}
+        span.postFooter
+          p.postFooter {{post.date | date: "h:mm a"}}
+          p.postFooter | 
+          a.viewComments 
+            p.postFooter [ ] {{post.comments.length}} 
+            p.postFooter(ng-pluralize count="post.comments.length" when="{'1': ' comment', 'other': ' comments'}")
+          p.postFooter |  
+          a.addComment 
+            p.postFooter Add Comment
+    
+  footer
