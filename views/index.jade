@@ -6,7 +6,7 @@ block content
     a.submitPost(ng-click="showForm()")
       span.plus + 
       span.submit Submit Post
-    input.search(type="text" placeholder="Search")
+    input.search(type="text" placeholder="Search" ng-model="search")
     label.sortby(for="sortby") Sort By
     select.drop(name="sortby" id="sortby" ng-model="q")
       option(name="sortby" value="votes") Votes
@@ -17,22 +17,22 @@ block content
       form.form(novalidate)
         label.form(for='title') Title
         p
-        input.form(ng-model="title" id="title" placeholder="Title")
+        input.form(ng-model="title" id="title" placeholder="Title" required)
         p
         label.form(for='author') Author
         p
-        input.form(ng-model="author" id="author" placeholder="Author")
+        input.form(ng-model="author" id="author" placeholder="Author" required)
         p
         label.form(for="image") Image URL 
         p
-        input.form(ng-model="image" id="image" placeholder="Image URL")
+        input.form(ng-model="image" id="image" placeholder="Image URL" required)
         p
         label.form(for="description") Description
         p
-        input.form(ng-model="description" id="description" placeholder="Description")
+        input.form(ng-model="description" id="description" placeholder="Description" required)
         p
         input.form(type="submit" ng-click='submitForm(title, author, image, description)' value="Submit Post")
-    div(ng-repeat="post in posts | orderBy: q")
+    div(ng-repeat="post in posts | filter: search")
       div.post
         img.photo(ng-src="{{post.image}}")
         p.title {{post.title}}  |  ^ v {{post.votes}}
