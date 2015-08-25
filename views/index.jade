@@ -13,24 +13,25 @@ block content
       option(name="sortby" value="date") Date
       option(name="sortby" value="title") Title
   main
-    div.form(ng-hide="{{form}} % 2 = 0")
-      label.form(for='title') Title
-      p
-      input.form(name="title" id="title" placeholder="Title")
-      p
-      label.form(for='author') Author
-      p
-      input.form(name="author" id="author" placeholder="Author")
-      p
-      label.form(for="image") Image URL 
-      p
-      input.form(name="image" id="image" placeholder="Image URL")
-      p
-      label.form(for="description") Description
-      p
-      input.form(name="description" id="description" placeholder="Description")
-      p
-      button.form(type="submit") Submit Post
+    div.form(ng-hide="1 + 1 == {{form}}")
+      form.form(novalidate)
+        label.form(for='title') Title
+        p
+        input.form(ng-model="title" id="title" placeholder="Title")
+        p
+        label.form(for='author') Author
+        p
+        input.form(ng-model="author" id="author" placeholder="Author")
+        p
+        label.form(for="image") Image URL 
+        p
+        input.form(ng-model="image" id="image" placeholder="Image URL")
+        p
+        label.form(for="description") Description
+        p
+        input.form(ng-model="description" id="description" placeholder="Description")
+        p
+        input.form(type="submit" ng-click='submitForm(title, author, image, description)' value="Submit Post")
     div(ng-repeat="post in posts | orderBy: q")
       div.post
         img.photo(ng-src="{{post.image}}")
