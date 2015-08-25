@@ -7,14 +7,15 @@ block content
       span.plus + 
       span.submit Submit Post
     input.search(type="text" placeholder="Search" ng-model="search")
-    label.sortby(for="sortby") Sort By
+    label.sortby(for="sortby") Sort By {{q}} 
+      i(class="fa fa-sort-desc")
     select.drop(name="sortby" id="sortby" ng-model="q")
       option(name="sortby" value="votes") Votes
       option(name="sortby" value="date") Date
       option(name="sortby" value="title") Title
   main
     div.form(ng-hide="1 + 1 == {{form}}")
-      form.form(novalidate)
+      form.form(novalidate name="newPost")
         label.form(for='title') Title
         p
         input.form(ng-model="title" id="title" placeholder="Title" required)
@@ -31,21 +32,33 @@ block content
         p
         input.form(ng-model="description" id="description" placeholder="Description" required)
         p
-        input.form(type="submit" ng-click='submitForm(title, author, image, description)' value="Submit Post")
-    div(ng-repeat="post in posts | filter: search")
+        input.submit(type="submit" ng-disabled="newPost.$invalid" ng-click='submitForm(title, author, image, description)' value="Submit Post")
+    div(ng-repeat="post in posts | filter: search | orderBy: q")
       div.post
         img.photo(ng-src="{{post.image}}")
-        p.title {{post.title}}  |  ^ v {{post.votes}}
+        span.postHeader
+          p(class="title postHeader") {{post.title}}  
+          p.postHeader  |  
+          p.postHeader 
+            a.upVote(ng-click="upVote()")
+              i(class="fa fa-arrow-up")
+            a.downVote 
+              i(class="fa fa-arrow-down")
+          p(class="postHeader last"  ng-class="{red: post.votes < 0, green: post.votes > 0}") {{post.votes}}
         p.author By {{post.author}}
         p.description {{post.description}}
         span.postFooter
           p.postFooter {{post.date | date: "h:mm a"}}
           p.postFooter | 
           a.viewComments 
-            p.postFooter [ ] {{post.comments.length}} 
+            p.postFooter 
+              i(class="fa fa-comment")
+              |   {{post.comments.length}} 
             p.postFooter(ng-pluralize count="post.comments.length" when="{'1': ' comment', 'other': ' comments'}")
           p.postFooter |  
           a.addComment 
-            p.postFooter Add Comment
+            p.postFooter
+              i(class="fa fa-pencil")
+              |  Add Comment
     
   footer

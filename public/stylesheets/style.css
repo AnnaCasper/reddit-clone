@@ -172,7 +172,8 @@ input.form {
   border-radius: 3px;
 }
 
-button.form {
+input.submit {
+  font-size: 14px;
   height: 30px;
   width: 100px;
   color: #666666;
@@ -196,4 +197,26 @@ button.form {
 
  .form input.ng-valid.ng-touched {
    background-color: #78FA89;
+ }
+
+ .postHeader {
+   float: left;
+   margin-left: 10px;
+ }
+
+ span.postHeader {
+   width: 78%;
+   height: 20px;
+ }
+
+ .red {
+   color: #FA787E;
+ }
+
+ .green {
+   color: #78FA89;
+ }
+
+ .last {
+   font-weight: bolder;
  }
