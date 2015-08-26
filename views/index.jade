@@ -14,30 +14,30 @@ block content
       option(name="sortby" value="date") Date
       option(name="sortby" value="title") Title
   main
-    div.form(ng-hide="1 + 1 == {{form}}")
+    div.form(ng-show="showingForm")
       form.form(novalidate name="newPost")
         label.form(for='title') Title
         p
-        input.form(ng-model="title" id="title" placeholder="Title" required)
+        input.form(ng-model="post.title" id="title" placeholder="Title" required)
         p
         label.form(for='author') Author
         p
-        input.form(ng-model="author" id="author" placeholder="Author" required)
+        input.form(ng-model="post.author" id="author" placeholder="Author" required)
         p
         label.form(for="image") Image URL 
         p
-        input.form(ng-model="image" id="image" placeholder="Image URL" required)
+        input.form(ng-model="post.image" id="image" placeholder="Image URL" required)
         p
         label.form(for="description") Description
         p
-        input.form(ng-model="description" id="description" placeholder="Description" required)
+        input.form(ng-model="post.description" id="description" placeholder="Description" required)
         p
-        input.submit(type="submit" ng-disabled="newPost.$invalid" ng-click='submitForm(title, author, image, description)' value="Submit Post")
+        input.submit(type="submit" ng-disabled="newPost.$invalid" ng-click='submitForm()' value="Submit Post")
     div(ng-repeat="post in posts | filter: search | orderBy: q")
       div.post
         img.photo(ng-src="{{post.image}}")
-        span.postHeader
-          p(class="title postHeader") {{post.title}}  
+        span(class="postHeader first")
+          p(class="title postHeader first") {{post.title}}  
           p.postHeader  |  
           p.postHeader 
             a.upVote(ng-click="upVote()")
@@ -47,8 +47,10 @@ block content
           p(class="postHeader last"  ng-class="{red: post.votes < 0, green: post.votes > 0}") {{post.votes}}
         p.author By {{post.author}}
         p.description {{post.description}}
-        span.postFooter
-          p.postFooter {{post.date | date: "h:mm a"}}
+        span(class="postFooter first")
+          p(class="postFooter first")
+            i(class="fa fa-calendar")
+            |   {{post.date | date: "h:mm a"}}
           p.postFooter | 
           a.viewComments 
             p.postFooter 
@@ -59,6 +61,6 @@ block content
           a.addComment 
             p.postFooter
               i(class="fa fa-pencil")
-              |  Add Comment
+              |   Add Comment
     
   footer
