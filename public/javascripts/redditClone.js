@@ -1,4 +1,4 @@
-var app = angular.module('redditClone', ['angularMoment']);
+var app = angular.module('redditClone', ['angularMoment', 'ngAnimate']);
 
 app.controller('RedditCloneController', function ($scope) {
   $scope.showingForm = false;
@@ -10,6 +10,7 @@ app.controller('RedditCloneController', function ($scope) {
     $scope.showingForm = !$scope.showingForm;
   };
   $scope.upVote = function (votes) {
+    console.log($scope.post);
     $scope.votes += 1
   };
   $scope.submitForm = function () {
@@ -21,9 +22,11 @@ app.controller('RedditCloneController', function ($scope) {
     $scope.showForm();
   };
   $scope.showComments = function (){
+    $scope.showingAddComment = false;
     $scope.showingComments = !$scope.showingComments;
   };
   $scope.showAddComment = function () {
+    $scope.showingComments = false;
     $scope.showingAddComment = !$scope.showingAddComment;
   };
   $scope.submitComment = function () {
@@ -72,7 +75,3 @@ app.controller('RedditCloneController', function ($scope) {
                   }
                 ];
 })
-
-// angular.module('redditClone').constant('angularMomentConfig', {
-//     preprocess: 'unix', // optional
-// });

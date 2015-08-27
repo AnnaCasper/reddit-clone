@@ -143,6 +143,7 @@ header {
   width: 90%;
   height: 200px;
   border-radius: 3px;
+  overflow: auto;
 }
 
 .title {
@@ -276,4 +277,26 @@ label.commentForm {
   height: 40px;
   text-align: center;
   line-height: 40px;
+}
+
+.postRepeat.ng-enter {
+  transition:0.75s linear all;
+  opacity:0;
+}
+
+.postRepeat.ng-enter-active {
+  opacity:1;
+}
+.postRepeat.ng-enter-stagger {
+  transition-delay: .1s;
+}
+.postRepeat.ng-leave-stagger {
+  transition-delay: .1s;
+}
+.postRepeat.ng-leave {
+  transition:0.75s linear all;
+  opacity:1;
+}
+.postRepeat.ng-leave-active {
+  opacity:0;
 }
