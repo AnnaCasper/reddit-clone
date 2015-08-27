@@ -141,9 +141,10 @@ header {
   border: 1px solid #d3d3d3;
   color: #777777;
   width: 90%;
-  height: 200px;
+  height: auto;
   border-radius: 3px;
-  overflow: auto;
+  min-height: 200px;
+  overflow: hidden;
 }
 
 .title {
@@ -186,6 +187,7 @@ input.submit {
 }
 
 .author {
+  display: block;
   width: 100%;
   text-align: right;
 }
@@ -207,12 +209,19 @@ input.submit {
    float: left;
    margin-left: 10px;
  }
-
- span.postHeader {
-   width: 80%;
-   height: 20px;
+ span.postFooter {
+   height: 30px;
  }
 
+ span.postHeader {
+   width: 79%;
+   height: 30px;
+ }
+
+p.description {
+  height: auto;
+  width: 100%
+}
  .red {
    color: #FA787E;
  }
@@ -227,6 +236,7 @@ input.submit {
    font-weight: bolder;
  }
  .comments {
+   height: 40px;
    float: right;
    width: 80%;
  }
@@ -253,6 +263,7 @@ label.commentForm {
 }
 
 .addCommentForm {
+  height: 40px;
   width: 80%;
   float: right;
 }
@@ -280,6 +291,11 @@ label.commentForm {
 }
 
 .postRepeat.ng-enter {
+  transition:0.75s linear all;
+  opacity:0;
+}
+
+.postRepeat.ng-move {
   transition:0.75s linear all;
   opacity:0;
 }
