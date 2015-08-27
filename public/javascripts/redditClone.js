@@ -1,7 +1,11 @@
-var app = angular.module('redditClone', []);
+var app = angular.module('redditClone', ['angularMoment']);
 
 app.controller('RedditCloneController', function ($scope) {
   $scope.showingForm = false;
+  $scope.showingComments = false;
+  $scope.showingAddComment = false;
+  $scope.showingSortOptions = false;
+  $scope.q = 'votes';
   $scope.showForm = function () {
     $scope.showingForm = !$scope.showingForm;
   };
@@ -9,9 +13,38 @@ app.controller('RedditCloneController', function ($scope) {
     $scope.votes += 1
   };
   $scope.submitForm = function () {
+    $scope.post['votes'] = 0;
+    $scope.post['date'] = new Date;
+    $scope.post['comments'] = [];
     $scope.posts.push($scope.post);
     $scope.post = {};
     $scope.showForm();
+  };
+  $scope.showComments = function (){
+    $scope.showingComments = !$scope.showingComments;
+  };
+  $scope.showAddComment = function () {
+    $scope.showingAddComment = !$scope.showingAddComment;
+  };
+  $scope.submitComment = function () {
+    console.log($scope.comment);
+    $scope.comment = {};
+    $scope.showAddComment();
+  };
+  $scope.showSort = function () {
+    $scope.showingSortOptions = !$scope.showingSortOptions
+  };
+  $scope.sortByDate = function () {
+    $scope.q = 'date';
+    $scope.showSort()
+  };
+  $scope.sortByVotes = function () {
+    $scope.q = 'votes';
+    $scope.showSort()
+  };
+  $scope.sortByTitle = function () {
+    $scope.q = 'title';
+    $scope.showSort()
   };
   $scope.posts = [
                   {
@@ -39,3 +72,7 @@ app.controller('RedditCloneController', function ($scope) {
                   }
                 ];
 })
+
+// angular.module('redditClone').constant('angularMomentConfig', {
+//     preprocess: 'unix', // optional
+// });

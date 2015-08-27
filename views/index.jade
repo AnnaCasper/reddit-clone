@@ -7,12 +7,13 @@ block content
       span.plus + 
       span.submit Submit Post
     input.search(type="text" placeholder="Search" ng-model="search")
-    label.sortby(for="sortby") Sort By {{q}} 
-      i(class="fa fa-sort-desc")
-    select.drop(name="sortby" id="sortby" ng-model="q")
-      option(name="sortby" value="votes") Votes
-      option(name="sortby" value="date") Date
-      option(name="sortby" value="title") Title
+    a(ng-click='showSort()')
+      div.sortby(for="sortby") Sort By {{q}} 
+        i(class="fa fa-sort-desc")
+    div.sortContainer(ng-show='showingSortOptions')
+      div.sortOption(ng-click="sortByVotes()") Votes
+      div.sortOption(ng-click="sortByDate()") Date
+      div.sortOption(ng-click="sortByTitle()") Title
   main
     div.form(ng-show="showingForm")
       form.form(novalidate name="newPost")
@@ -34,7 +35,7 @@ block content
         p
         input.submit(type="submit" ng-disabled="newPost.$invalid" ng-click='submitForm()' value="Submit Post")
     div(ng-repeat="post in posts | filter: search | orderBy: q")
-      div.post
+      div.post(ng-class='{smaller: !showingComments, larger: showingComments}')
         img.photo(ng-src="{{post.image}}")
         span(class="postHeader first")
           p(class="title postHeader first") {{post.title}}  
@@ -50,17 +51,28 @@ block content
         span(class="postFooter first")
           p(class="postFooter first")
             i(class="fa fa-calendar")
-            |   {{post.date | date: "h:mm a"}}
+            |   {{post.date | amCalendar}}
           p.postFooter | 
-          a.viewComments 
+          a.viewComments(ng-click="showComments()") 
             p.postFooter 
               i(class="fa fa-comment")
               |   {{post.comments.length}} 
             p.postFooter(ng-pluralize count="post.comments.length" when="{'1': ' comment', 'other': ' comments'}")
           p.postFooter |  
-          a.addComment 
+          a.addComment(ng-click="showAddComment()") 
             p.postFooter
               i(class="fa fa-pencil")
               |   Add Comment
-    
+        div(ng-repeat="comment in post.comments")
+          div.comments(ng-show="showingComments")
+            p.commentAuthor {{comment.author}}
+            p.text - {{comment.text}}
+        div.addCommentForm(ng-show="showingAddComment")
+          form.commentForm(novalidate name="newComment")
+            label.commentForm(for='commentAuthor') Author: 
+            input.commentForm(id="commentAuthor" name="comment.author" placeholder="Username")
+            label.commentForm(for='commentAuthor') Text: 
+            input(class="commentForm last" id="commentAuthor" name="comment.text" placeholder="Comment Text")
+            input.submit(type="submit" ng-click='submitComment()' value="Submit")
+            
   footer
