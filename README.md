@@ -1,7 +1,7 @@
 ## URL
 https://gentle-caverns-3187.herokuapp.com/
 
-## Reddit Clone
+## CO Adventures
 This app was created as a project during Galvanize Full Stack program.
 It was used as an exercise to learn Angular.js.
 

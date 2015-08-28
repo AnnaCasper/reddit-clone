@@ -124,7 +124,7 @@ header {
 
 .sortby {
   margin-left: 30px;
-  margin-right: 750px;
+  margin-right: 700px;
   width: 100px;
   float: right;
 }
@@ -281,7 +281,7 @@ label.commentForm {
 .sortOption {
   border: 1px solid #666666;
   margin-left: 30px;
-  margin-right: 750px;
+  margin-right: 700px;
   width: 100px;
   float: right;
   background-color: white;

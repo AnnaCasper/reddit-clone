@@ -5,13 +5,13 @@ app.controller('RedditCloneController', function ($scope) {
   $scope.showingComments = false;
   $scope.showingAddComment = false;
   $scope.showingSortOptions = false;
-  $scope.q = 'votes';
+  $scope.q = 'title';
+  $scope.w = 'title';
   $scope.showForm = function () {
     $scope.showingForm = !$scope.showingForm;
   };
   $scope.upVote = function (post) {
     post.votes += 1
-
   };
   $scope.downVote = function (post) {
     post.votes -= 1
@@ -42,15 +42,26 @@ app.controller('RedditCloneController', function ($scope) {
   };
   $scope.sortByDate = function () {
     $scope.q = 'date';
+    $scope.w = 'date';
     $scope.showSort()
   };
   $scope.sortByVotes = function () {
-    $scope.q = 'votes';
+    $scope.q = '-votes';
+    $scope.w = 'votes';
     $scope.showSort()
   };
   $scope.sortByTitle = function () {
     $scope.q = 'title';
+    $scope.w = 'title';
     $scope.showSort()
+  };
+  $scope.submitComment = function (post) {
+    console.log($scope.comment.text);
+    post.comments.push({
+                        text: text,
+                        author: author
+                      })
+    $scope.showAddComment();
   };
   $scope.posts = [
                   {
@@ -72,9 +83,46 @@ app.controller('RedditCloneController', function ($scope) {
                     comments: [
                                 {
                                   author: 'Penny',
-                                  text: 'This look fantastic!'
+                                  text: 'This looks fantastic!'
                                 }
                               ]
+                  },
+                  {
+                    title: 'Hanging Lake, CO',
+                    author: 'Andrea Droz',
+                    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Glenwood_Canyon.jpg',
+                    description: "Sartorial Truffaut 3 wolf moon synth typewriter deep v gastropub. Before they sold out fixie kogi, pop-up mlkshk tilde polaroid cold-pressed. Try-hard plaid you probably haven't heard of them McSweeney's retro narwhal, cardigan art party Carles gluten-free pop-up whatever PBR&B. Pitchfork VHS mixtape, cold-pressed craft beer hoodie yr four loko irony asymmetrical. Fingerstache heirloom mlkshk, aesthetic stumptown fanny pack occupy lumbersexual ugh 90's drinking vinegar food truck tousled messenger bag Intelligentsia. Bespoke ennui tofu, mumblecore migas four loko VHS Vice Tumblr banh mi literally. Art party meggings semiotics, meh ethical fixie actually quinoa.",
+                    votes: 0,
+                    date: new Date,
+                    comments: [
+                                {
+                                  author: 'Emily',
+                                  text: 'I want to go there!'
+                                }
+                              ]
+                  },
+                  {
+                    title: 'Strawberry Park Hot Springs, CO',
+                    author: 'Laura Fairbanks',
+                    image: 'http://www.wickedgoodtraveltips.com/wp-content/uploads/2014/10/strawberry_park_steamboat.jpg',
+                    description: "Sartorial Truffaut 3 wolf moon synth typewriter deep v gastropub. Before they sold out fixie kogi, pop-up mlkshk tilde polaroid cold-pressed. Try-hard plaid you probably haven't heard of them McSweeney's retro narwhal, cardigan art party Carles gluten-free pop-up whatever PBR&B. Pitchfork VHS mixtape, cold-pressed craft beer hoodie yr four loko irony asymmetrical. Fingerstache heirloom mlkshk, aesthetic stumptown fanny pack occupy lumbersexual ugh 90's drinking vinegar food truck tousled messenger bag Intelligentsia. Bespoke ennui tofu, mumblecore migas four loko VHS Vice Tumblr banh mi literally. Art party meggings semiotics, meh ethical fixie actually quinoa.",
+                    votes: 0,
+                    date: new Date,
+                    comments: [
+                                {
+                                  author: 'Drew',
+                                  text: 'I want to go there!'
+                                }
+                              ]
+                  },
+                  {
+                    title: 'Mount Princeton Hot Springs, CO',
+                    author: 'Drew Eflin',
+                    image: 'http://www.mtprinceton.org/mt-princeton-hot-springs.jpg',
+                    description: "Sartorial Truffaut 3 wolf moon synth typewriter deep v gastropub. Before they sold out fixie kogi, pop-up mlkshk tilde polaroid cold-pressed. Try-hard plaid you probably haven't heard of them McSweeney's retro narwhal, cardigan art party Carles gluten-free pop-up whatever PBR&B. Pitchfork VHS mixtape, cold-pressed craft beer hoodie yr four loko irony asymmetrical. Fingerstache heirloom mlkshk, aesthetic stumptown fanny pack occupy lumbersexual ugh 90's drinking vinegar food truck tousled messenger bag Intelligentsia. Bespoke ennui tofu, mumblecore migas four loko VHS Vice Tumblr banh mi literally. Art party meggings semiotics, meh ethical fixie actually quinoa.",
+                    votes: 0,
+                    date: new Date,
+                    comments: []
                   }
                 ];
 })
