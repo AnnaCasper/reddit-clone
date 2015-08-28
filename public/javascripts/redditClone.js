@@ -26,16 +26,11 @@ app.controller('RedditCloneController', function ($scope) {
   };
   $scope.showComments = function (){
     $scope.showingAddComment = false;
-    $scope.showingComments = !$scope.showingComments;
+    this.showingComments = !this.showingComments;
   };
-  $scope.showAddComment = function () {
+  $scope.showAddComment = function (post) {
     $scope.showingComments = false;
-    $scope.showingAddComment = !$scope.showingAddComment;
-  };
-  $scope.submitComment = function () {
-    console.log($scope.comment);
-    $scope.comment = {};
-    $scope.showAddComment();
+    this.showingAddComment = !this.showingAddComment;
   };
   $scope.showSort = function () {
     $scope.showingSortOptions = !$scope.showingSortOptions
@@ -55,13 +50,13 @@ app.controller('RedditCloneController', function ($scope) {
     $scope.w = 'title';
     $scope.showSort()
   };
-  $scope.submitComment = function (post) {
-    console.log($scope.comment.text);
-    post.comments.push({
-                        text: text,
-                        author: author
-                      })
-    $scope.showAddComment();
+  $scope.submitComment = function (post, author, message) {
+    post.comments.push({author: author,
+                        text: message
+                      });
+    author = '';
+    message = '';
+    $scope.showingAddComment = false;
   };
   $scope.posts = [
                   {

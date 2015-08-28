@@ -68,11 +68,11 @@ block content
             p.commentAuthor {{comment.author}}
             p.text - {{comment.text}}
         div.addCommentForm(ng-show="showingAddComment")
-          form.commentForm(novalidate name="newComment")
+          form.commentForm(novalidate name="newComment" ng-submit='submitComment(post,author, message)')
             label.commentForm(for='commentAuthor') Author: 
-            input.commentForm(id="commentAuthor" ng-model="comment.author" placeholder="Username")
+            input.commentForm(type="text" id="commentAuthor" ng-model="author" placeholder="Username")
             label.commentForm(for='commentAuthor') Text: 
-            input(class="commentForm last" id="commentAuthor" ng-model="comment.text" placeholder="Comment Text")
-            input.submit(type="submit" ng-click='submitComment(post)' value="Submit")
+            input(type="text" class="commentForm last" id="commentAuthor" ng-model="message" placeholder="Comment Text")
+            input.submit(type="submit" value="Submit")
             
   footer
