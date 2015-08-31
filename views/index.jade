@@ -35,7 +35,7 @@ block content
         p
         input.submit(type="submit" ng-disabled="newPost.$invalid" ng-click='submitForm()' value="Submit Post")
     div.postRepeat(ng-repeat="post in posts | filter: search | orderBy: q")
-      div.post(ng-class='{smaller: !showingComments, larger: showingComments}' ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}")
+      div.post(ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}")
         img.photo(ng-src="{{post.image}}")
         span(class="postHeader first")
           p(class="title postHeader first") {{post.title}}  

@@ -54,8 +54,6 @@ app.controller('RedditCloneController', function ($scope) {
     post.comments.push({author: author,
                         text: message
                       });
-    author = '';
-    message = '';
     $scope.showingAddComment = false;
   };
   $scope.posts = [
